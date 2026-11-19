@@ -1,0 +1,30 @@
+{
+  "name": "portafolio-qa-cypress",
+  "version": "1.0.0",
+  "description": "QA E2E y API con Cypress para frandercenteno.vercel.app",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test:mobile": "cypress run --config viewportWidth=375,viewportHeight=812 --spec \"cypress/e2e/*.cy.ts\"",
+    "test:desktop": "cypress run --config viewportWidth=1440,viewportHeight=900 --spec \"cypress/e2e/*.cy.ts\"",
+    "test:api": "cypress run --spec \"cypress/e2e/api/*.cy.ts\"",
+    "test": "npm run test:api && npm run test:mobile && npm run test:desktop",
+    "cy:open": "cypress open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "cypress": "^16.3.0",
+    "eslint": "^10.15.0",
+    "eslint-plugin-cypress": "^7.1.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.73.0"
+  },
+  "private": true
+}

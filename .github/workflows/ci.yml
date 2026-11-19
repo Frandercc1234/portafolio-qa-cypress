@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+  schedule:
+    - cron: '0 6 * * *' # smoke test diario contra producción (06:00 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx cypress install
+      - run: npm run test:api
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: evidencia-api
+          path: |
+            cypress/screenshots
+            cypress/videos
+          if-no-files-found: ignore
+
+  e2e:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: [mobile, desktop]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx cypress install
+      - run: npm run test:${{ matrix.viewport }}
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: evidencia-e2e-${{ matrix.viewport }}
+          path: |
+            cypress/screenshots
+            cypress/videos
+          if-no-files-found: ignore
