@@ -9,7 +9,7 @@
 Se prueba lo que un visitante (o un reclutador) usa del portafolio:
 
 - Inicio en `/en` y `/es`: hero con nombre y botón de CV por idioma.
-- Las 5 tarjetas de casos destacados y la página de cada uno de los 6 casos (los 5 destacados y `qa-cypress`, listado en "Otros proyectos") en ambos idiomas.
+- Las 5 tarjetas de casos destacados y la página de cada uno de los 7 casos (los 5 destacados y `turismo-cr` y `qa-cypress`, listados en "Otros proyectos") en ambos idiomas.
 - Selector de idioma (conserva la ruta) y manejo de rutas inexistentes (404).
 - Menú móvil (375 px): apertura, anclas y cierre con Escape.
 - Formulario de contacto: validación de campos vacíos (nunca un envío válido).
@@ -35,7 +35,7 @@ Se prueba lo que un visitante (o un reclutador) usa del portafolio:
 | Navegador | Electron/Chrome headless (Cypress) |
 | CI | GitHub Actions, `ubuntu-latest`, Node LTS |
 
-Las pruebas E2E corren en los dos viewports; las de API corren una sola vez porque no dependen del viewport. Total actual: 86 pruebas (8 API + 39 móvil + 39 escritorio).
+Las pruebas E2E corren en los dos viewports; las de API corren una sola vez porque no dependen del viewport. Total actual: 90 pruebas (8 API + 41 móvil + 41 escritorio).
 
 ### Decisiones de entorno
 
@@ -63,15 +63,15 @@ Las pruebas E2E corren en los dos viewports; las de API corren una sola vez porq
 |---|---|---|---|---|
 | CP-01 | Inicio en inglés | 1. Visitar `/en`. 2. Leer el hero. 3. Revisar el botón de CV. | El `h1` es "Frander Centeno" y el botón de CV apunta a `/cv/CV_Frander_Centeno_EN.pdf`. | E2E |
 | CP-02 | Inicio en español | 1. Visitar `/es`. 2. Leer el hero. 3. Revisar el botón de CV. | El `h1` es "Frander Centeno" y el botón de CV apunta a `/cv/CV_Frander_Centeno_ES.pdf`. | E2E |
-| CP-03 | Tarjetas de casos destacados | 1. Visitar `/en`. 2. Para cada una de las 5 tarjetas destacadas, hacer clic (`qa-cypress` no es destacado y no se prueba aquí). | Cada tarjeta navega a `/en/projects/<slug>` y la página carga. | E2E |
-| CP-04 | Casos en inglés | 1. Visitar `/en/projects/<slug>` (×6). | Hay un solo `h1` y las secciones del caso (`h2`). | E2E |
-| CP-05 | Casos en español | 1. Visitar `/es/projects/<slug>` (×6). | Hay un solo `h1` y las secciones del caso (`h2`). | E2E |
+| CP-03 | Tarjetas de casos destacados | 1. Visitar `/en`. 2. Para cada una de las 5 tarjetas destacadas, hacer clic (`turismo-cr` y `qa-cypress` no son destacados y no se prueban aquí). | Cada tarjeta navega a `/en/projects/<slug>` y la página carga. | E2E |
+| CP-04 | Casos en inglés | 1. Visitar `/en/projects/<slug>` (×7). | Hay un solo `h1` y las secciones del caso (`h2`). | E2E |
+| CP-05 | Casos en español | 1. Visitar `/es/projects/<slug>` (×7). | Hay un solo `h1` y las secciones del caso (`h2`). | E2E |
 | CP-06 | Selector de idioma conserva la ruta | 1. Visitar `/en/projects/purareserva`. 2. Cambiar idioma a español. | La URL es `/es/projects/purareserva` y el contenido está en español. | Regresión |
 | CP-07 | Slug inexistente | 1. Pedir `/en/projects/no-existe`. | Respuesta 404 y se muestra la página de error. | E2E |
 | CP-08 | Menú móvil | 1. En 375 px abrir el menú. 2. Seguir un enlace de ancla. 3. Reabrir y pulsar Escape. (En escritorio: el botón de menú no se ve y la navegación está en línea.) | El menú abre (`aria-expanded=true`), lleva a la sección y cierra con Escape. | Accesibilidad |
 | CP-09 | Formulario vacío | 1. Ir a `#contact`. 2. Enviar sin completar. | El servidor rechaza el envío (`VALIDATION`) y cada campo muestra su error visible, con `aria-invalid="true"` y `aria-describedby` apuntando al mensaje. Turnstile no interviene. | Accesibilidad |
 | CP-10 | Sin scroll horizontal | 1. Para 320, 375, 768, 1024 y 1440 px, visitar `/en`, `/es` y un caso por idioma. 2. Comparar `scrollWidth` con `innerWidth`. | `scrollWidth <= innerWidth` en todos los anchos. **Hallazgos corregidos:** falló a 320 y 768 px (header, issue #1) y a 1024 px en el inicio (contacto, issue #2); ya pasa. | Regresión |
-| CP-11 | Sitemap | 1. `GET /sitemap.xml`. | 200 y 14 `<loc>` (2 inicios + 6 casos × 2 idiomas). | API |
+| CP-11 | Sitemap | 1. `GET /sitemap.xml`. | 200 y 16 `<loc>` (2 inicios + 7 casos × 2 idiomas). | API |
 | CP-12 | Robots | 1. `GET /robots.txt`. | 200 y contiene `Sitemap: https://frandercenteno.vercel.app/sitemap.xml`. | API |
 | CP-13 | OG del inicio | 1. `GET /en/opengraph-image`. | 200 y `content-type: image/png`. | API |
 | CP-14 | OG de un caso | 1. `GET /en/projects/purareserva/opengraph-image`. | 200 y `content-type: image/png`. | API |

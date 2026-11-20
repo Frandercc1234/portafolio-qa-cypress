@@ -1,9 +1,9 @@
 describe('API: sitemap y robots', () => {
-  it('CP-11 /sitemap.xml responde 200 y tiene 14 URLs', () => {
+  it('CP-11 /sitemap.xml responde 200 y tiene 16 URLs', () => {
     cy.request('/sitemap.xml').then((res) => {
       expect(res.status).to.eq(200);
       const locs = (res.body as string).match(/<loc>[^<]+<\/loc>/g) ?? [];
-      expect(locs).to.have.length(14);
+      expect(locs).to.have.length(16);
     });
   });
 

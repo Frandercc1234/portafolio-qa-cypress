@@ -1,14 +1,14 @@
 /** Casos destacados (`featured: true`): son las 5 tarjetas de la sección de proyectos. */
 export const FEATURED_SLUGS = [
   'purareserva',
+  'payments-service',
   'nicoya-zmt',
   'pipeline-bccr',
   'asada-gamalotal',
-  'turismo-cr',
 ] as const;
 
 /** Todos los casos publicados: los destacados más los de "Otros proyectos". */
-export const SLUGS = [...FEATURED_SLUGS, 'qa-cypress'] as const;
+export const SLUGS = [...FEATURED_SLUGS, 'turismo-cr', 'qa-cypress'] as const;
 
 export const LOCALES = ['en', 'es'] as const;
 export type Locale = (typeof LOCALES)[number];

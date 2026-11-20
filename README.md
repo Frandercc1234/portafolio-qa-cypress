@@ -8,7 +8,7 @@ Proyecto de QA con **Cypress + TypeScript** que prueba mi portafolio en producci
 
 ## Qué se prueba
 
-- **E2E** (`cypress/e2e/`), en móvil 375×812 y escritorio 1440×900: inicio en `/en` y `/es`, tarjetas de casos, los 6 casos en ambos idiomas (5 destacados y `qa-cypress`), selector de idioma, 404, menú móvil, validación del formulario de contacto y ausencia de scroll horizontal.
+- **E2E** (`cypress/e2e/`), en móvil 375×812 y escritorio 1440×900: inicio en `/en` y `/es`, tarjetas de casos, los 7 casos en ambos idiomas (5 destacados y 2 de "Otros proyectos"), selector de idioma, 404, menú móvil, validación del formulario de contacto y ausencia de scroll horizontal.
 - **API** (`cypress/e2e/api/`, con `cy.request`): `sitemap.xml`, `robots.txt`, imágenes OG, PDF del CV, encabezados de seguridad y redirección por `Accept-Language`.
 
 Detalles, alcance, criterios de entrada/salida y pasos de cada caso: [`docs/plan-de-pruebas.md`](docs/plan-de-pruebas.md).
@@ -51,7 +51,7 @@ npm run lint && npm run typecheck
 | CP-08 | Menú móvil (abre, anclas, Escape) | Accesibilidad | ✅ Pasa |
 | CP-09 | Formulario vacío muestra errores por campo | Accesibilidad | ✅ Pasa |
 | CP-10 | Sin scroll horizontal (320–1440 px) | Regresión | ✅ Pasa (tras corregir [#1](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/1) y [#2](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/2)) |
-| CP-11 | `sitemap.xml`: 200 y 14 URLs | API | ✅ Pasa |
+| CP-11 | `sitemap.xml`: 200 y 16 URLs | API | ✅ Pasa |
 | CP-12 | `robots.txt` apunta al sitemap | API | ✅ Pasa |
 | CP-13 | OG del inicio es `image/png` | API | ✅ Pasa |
 | CP-14 | OG de un caso es `image/png` | API | ✅ Pasa |
@@ -59,7 +59,7 @@ npm run lint && npm run typecheck
 | CP-16 | Encabezados de seguridad presentes | API | ✅ Pasa |
 | CP-17 | `Accept-Language: es` redirige a `/es` | API | ✅ Pasa |
 
-**Total: 86 pruebas** (8 de API + 39 E2E en móvil + 39 E2E en escritorio), todas pasando.
+**Total: 90 pruebas** (8 de API + 41 E2E en móvil + 41 E2E en escritorio), todas pasando.
 
 ### Bugs encontrados y corregidos
 
