@@ -4,7 +4,7 @@
 
 Proyecto de QA con **Cypress + TypeScript** que prueba mi portafolio en producción: <https://frandercenteno.vercel.app>.
 
-> **English summary:** Automated QA suite (Cypress, TypeScript, ESLint) that tests my live portfolio at the URL above: E2E tests on mobile (375×812) and desktop (1440×900), API tests with `cy.request` (sitemap, robots, OG images, CV PDFs, security headers, language redirect). It runs on every push and daily on a schedule (production smoke test) via GitHub Actions, uploading screenshots and videos on failure. Test plan: [`docs/plan-de-pruebas.md`](docs/plan-de-pruebas.md). The suite found real site bugs (horizontal overflow, issues [#1](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/1) and [#2](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/2)); the affected tests are marked pending with the issue number.
+> **English summary:** Automated QA suite (Cypress, TypeScript, ESLint) that tests my live portfolio at the URL above: E2E tests on mobile (375×812) and desktop (1440×900), API tests with `cy.request` (sitemap, robots, OG images, CV PDFs, security headers, language redirect). It runs on every push and daily on a schedule (production smoke test) via GitHub Actions, uploading screenshots and videos on failure. Test plan: [`docs/plan-de-pruebas.md`](docs/plan-de-pruebas.md). The suite found two real site bugs (horizontal overflow, issues [#1](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/1) and [#2](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/2)); both were fixed in the site and the tests now pass.
 
 ## Qué se prueba
 
@@ -50,7 +50,7 @@ npm run lint && npm run typecheck
 | CP-07 | Slug inexistente devuelve 404 | E2E | ✅ Pasa |
 | CP-08 | Menú móvil (abre, anclas, Escape) | Accesibilidad | ✅ Pasa |
 | CP-09 | Formulario vacío muestra errores por campo | Accesibilidad | ✅ Pasa |
-| CP-10 | Sin scroll horizontal (320–1440 px) | Regresión | ⚠️ Bug del sitio: [#1](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/1) (320 y 768 px), [#2](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/2) (1024 px, inicio). 10 de 20 combinaciones pendientes |
+| CP-10 | Sin scroll horizontal (320–1440 px) | Regresión | ✅ Pasa (tras corregir [#1](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/1) y [#2](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/2)) |
 | CP-11 | `sitemap.xml`: 200 y 12 URLs | API | ✅ Pasa |
 | CP-12 | `robots.txt` apunta al sitemap | API | ✅ Pasa |
 | CP-13 | OG del inicio es `image/png` | API | ✅ Pasa |
@@ -58,6 +58,13 @@ npm run lint && npm run typecheck
 | CP-15 | PDF del CV: 200 y `application/pdf` | API | ✅ Pasa |
 | CP-16 | Encabezados de seguridad presentes | API | ✅ Pasa |
 | CP-17 | `Accept-Language: es` redirige a `/es` | API | ✅ Pasa |
+
+### Bugs encontrados y corregidos
+
+Esta suite encontró dos defectos reales del portafolio (desbordamiento horizontal). Ambos se corrigieron en [Frandercc1234/portafolio#5](https://github.com/Frandercc1234/portafolio/pull/5) y las pruebas CP-10 que antes estaban pendientes ahora pasan:
+
+- [#1](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/1): el header se desbordaba del viewport a 320 px y a 768 px.
+- [#2](https://github.com/Frandercc1234/portafolio-qa-cypress/issues/2): scroll horizontal en la sección de contacto del inicio a 1024 px.
 
 ## Reportar un bug
 

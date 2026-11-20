@@ -42,7 +42,7 @@ Las pruebas E2E corren en los dos viewports; las de API corren una sola vez porq
 - **Analítica bloqueada:** un `beforeEach` de soporte aplica `cy.intercept('**/_vercel/insights/**', { statusCode: 204 })` en todas las pruebas, para que las corridas de CI no cuenten como visitas en Vercel Analytics.
 - **Formulario:** solo se envía el formulario **vacío**, que el servidor rechaza con `VALIDATION` antes de llegar a Turnstile o al correo. La prueba espía el `POST` y falla si la respuesta no es un rechazo (`"ok":true` nunca debe aparecer). No se completa ningún campo con datos válidos y no se intenta resolver ni saltar Turnstile.
 - **Scroll horizontal:** se compara `scrollWidth` con `window.innerWidth` (no `clientWidth`), porque el navegador headless de Cypress reserva un scrollbar clásico de 15 px.
-- **Bugs conocidos:** las pruebas que fallan por un defecto real del sitio quedan como pendientes (`it.skip`) con el número del issue en el nombre, para que el CI siga siendo útil sin esconder el defecto.
+- **Bugs conocidos:** mientras un defecto real del sitio esté abierto, su prueba puede quedar pendiente (`it.skip`) con el número del issue en el nombre. Hoy no hay ninguno.
 - **Producción como entorno:** los datos son estables pero el contenido puede cambiar; las aserciones usan rol/estructura y solo el nombre del hero como texto exacto.
 
 ## 4. Criterios de entrada y salida
@@ -70,7 +70,7 @@ Las pruebas E2E corren en los dos viewports; las de API corren una sola vez porq
 | CP-07 | Slug inexistente | 1. Pedir `/en/projects/no-existe`. | Respuesta 404 y se muestra la página de error. | E2E |
 | CP-08 | Menú móvil | 1. En 375 px abrir el menú. 2. Seguir un enlace de ancla. 3. Reabrir y pulsar Escape. (En escritorio: el botón de menú no se ve y la navegación está en línea.) | El menú abre (`aria-expanded=true`), lleva a la sección y cierra con Escape. | Accesibilidad |
 | CP-09 | Formulario vacío | 1. Ir a `#contact`. 2. Enviar sin completar. | El servidor rechaza el envío (`VALIDATION`) y cada campo muestra su error visible, con `aria-invalid="true"` y `aria-describedby` apuntando al mensaje. Turnstile no interviene. | Accesibilidad |
-| CP-10 | Sin scroll horizontal | 1. Para 320, 375, 768, 1024 y 1440 px, visitar `/en`, `/es` y un caso por idioma. 2. Comparar `scrollWidth` con `innerWidth`. | `scrollWidth <= innerWidth` en todos los anchos. **Hallazgos:** falla a 320 y 768 px (header, issue #1) y a 1024 px en el inicio (contacto, issue #2). | Regresión |
+| CP-10 | Sin scroll horizontal | 1. Para 320, 375, 768, 1024 y 1440 px, visitar `/en`, `/es` y un caso por idioma. 2. Comparar `scrollWidth` con `innerWidth`. | `scrollWidth <= innerWidth` en todos los anchos. **Hallazgos corregidos:** falló a 320 y 768 px (header, issue #1) y a 1024 px en el inicio (contacto, issue #2); ya pasa. | Regresión |
 | CP-11 | Sitemap | 1. `GET /sitemap.xml`. | 200 y 12 `<loc>` (2 inicios + 5 casos × 2 idiomas). | API |
 | CP-12 | Robots | 1. `GET /robots.txt`. | 200 y contiene `Sitemap: https://frandercenteno.vercel.app/sitemap.xml`. | API |
 | CP-13 | OG del inicio | 1. `GET /en/opengraph-image`. | 200 y `content-type: image/png`. | API |
