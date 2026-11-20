@@ -1,4 +1,4 @@
-import { CV_LINK_NAME, CV_PATH, LOCALES, OWNER_NAME, SLUGS } from '../support/constants';
+import { CV_LINK_NAME, CV_PATH, FEATURED_SLUGS, LOCALES, OWNER_NAME } from '../support/constants';
 
 describe('Inicio', () => {
   const caseNumber = { en: 'CP-01', es: 'CP-02' } as const;
@@ -14,7 +14,7 @@ describe('Inicio', () => {
   });
 
   it('CP-03 las 5 tarjetas de casos destacados navegan a su caso', () => {
-    SLUGS.forEach((slug) => {
+    FEATURED_SLUGS.forEach((slug) => {
       cy.visit('/en');
       cy.get('#projects').find(`a[href="/en/projects/${slug}"]`).first().click();
       cy.location('pathname').should('eq', `/en/projects/${slug}`);
