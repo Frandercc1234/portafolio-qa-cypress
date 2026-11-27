@@ -7,7 +7,7 @@ export const FEATURED_SLUGS = [
   'asada-gamalotal',
 ] as const;
 
-/** Todos los casos publicados: los destacados más los de "Otros proyectos". */
+/** Todos los casos publicados: los destacados más los de "Más proyectos" / "More projects". */
 export const SLUGS = [...FEATURED_SLUGS, 'turismo-cr', 'qa-cypress'] as const;
 
 export const LOCALES = ['en', 'es'] as const;

@@ -8,7 +8,7 @@ Proyecto de QA con **Cypress + TypeScript** que prueba mi portafolio en producci
 
 ## Qué se prueba
 
-- **E2E** (`cypress/e2e/`), en móvil 375×812 y escritorio 1440×900: inicio en `/en` y `/es`, tarjetas de casos, los 7 casos en ambos idiomas (5 destacados y 2 de "Otros proyectos"), selector de idioma, 404, menú móvil, validación del formulario de contacto y ausencia de scroll horizontal.
+- **E2E** (`cypress/e2e/`), en móvil 375×812 y escritorio 1440×900: inicio en `/en` y `/es`, tarjetas de casos, los 7 casos en ambos idiomas (5 destacados y 2 de "Más proyectos" / "More projects"), selector de idioma, 404, menú móvil, validación del formulario de contacto y ausencia de scroll horizontal.
 - **API** (`cypress/e2e/api/`, con `cy.request`): `sitemap.xml`, `robots.txt`, imágenes OG, PDF del CV, encabezados de seguridad y redirección por `Accept-Language`.
 
 Detalles, alcance, criterios de entrada/salida y pasos de cada caso: [`docs/plan-de-pruebas.md`](docs/plan-de-pruebas.md).

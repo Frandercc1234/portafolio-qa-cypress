@@ -2,14 +2,14 @@
 
 **Sistema bajo prueba:** https://frandercenteno.vercel.app (producción)
 **Herramienta:** Cypress + TypeScript
-**Autor:** Frander Centeno · **Última revisión:** 2026-11-20
+**Autor:** Frander Centeno · **Última revisión:** 2026-11-26
 
 ## 1. Alcance
 
 Se prueba lo que un visitante (o un reclutador) usa del portafolio:
 
 - Inicio en `/en` y `/es`: hero con nombre y botón de CV por idioma.
-- Las 5 tarjetas de casos destacados y la página de cada uno de los 7 casos (los 5 destacados y `turismo-cr` y `qa-cypress`, listados en "Otros proyectos") en ambos idiomas.
+- Las 5 tarjetas de casos destacados y la página de cada uno de los 7 casos (los 5 destacados y `turismo-cr` y `qa-cypress`, listados en "Más proyectos" / "More projects") en ambos idiomas.
 - Selector de idioma (conserva la ruta) y manejo de rutas inexistentes (404).
 - Menú móvil (375 px): apertura, anclas y cierre con Escape.
 - Formulario de contacto: validación de campos vacíos (nunca un envío válido).
